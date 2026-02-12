@@ -33,10 +33,10 @@ Link to Original: https://archive.org/details/amongcarterjrfam1984stac/amongcart
 The Chapman's format lasted until the 1930s or 1940s, and then gave way to this format, which lasted into the 1980s or 1990s, depending on the auction house. This format is similar to the previous, but due to advances in photographic technology and decreases in price, now include images directly above the description of that item, rather than in a dedicated photographic plate like the Chapmans had to do.  However, these photographs were not included for every lot, providing a challenge for the scraper.  The lots with images also include bolded elements, which represent a shortened version of the description to identify the item at a quick glance (Short_Description).  The most important lots also include a Headline atop of it, drawing attention to the lot, which can be multiple lines, bold, capitalized, or some combination of them.  The era of named and priced sales had passed by this point, due to changes in the hobby and the rise of mail bids and auction agents that obscured the bidder's identity, so this feature will not be included from here on out.
 
 ##### 5. Complex Layouts
-Example Catalog #5a: The Jascha Heifetz Collection Sale (Superior, 10/1989)
-Link to Original #5a: https://archive.org/details/jaschaheifetzcol1989supe/page/96/mode/1up
-Example Catalog #5b: The Long Beach Sale (Heritage, 9/1996)
-Link to Original #5b: https://archive.org/details/september1996lon1996heri/page/63/mode/1up
+Example Catalog #5a: The Jascha Heifetz Collection Sale (Superior, 10/1989)\n
+Link to Original #5a: https://archive.org/details/jaschaheifetzcol1989supe/page/96/mode/1up\n
+Example Catalog #5b: The Long Beach Sale (Heritage, 9/1996)\n
+Link to Original #5b: https://archive.org/details/september1996lon1996heri/page/63/mode/1up\n
 
 While some auction companies continued with the previous format for a long period of time, others had two-columns of lots, but with the same general format (including interspersed images), starting in the 1970s or 1980s. Short_Descriptions are nearly universal, and Headlines are provided for almost every imaged lot, with images becoming more and more common as time goes by.  Two files exist: one for Superior Auctions (5a), and one for Heritage Auctions (5b). The latter was included to see if the model made for the former was generalizable, and it was.
 
