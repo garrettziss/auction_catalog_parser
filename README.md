@@ -1,4 +1,4 @@
-# auction_catalog_parser
+# Auction Catalog Parser
 
 ### Purpose
 
@@ -42,6 +42,6 @@ While some auction companies continued with the previous format for a long perio
 
 ### Output
 
-The model outputs an Excel file, auction_catalog_parser.xlsx. The file example_auction_catalog_parser contains a hand-typed version of the ideal.
+The model outputs an Excel file, auction_catalog_parser.xlsx. The file example_auction_catalog_parser contains a hand-typed version of the ideal.  However, it excludes file 5b, since as mentioned previously, that is used to test the generalizability of the scraper using the most complex possible format.
 
 ### Limitations
