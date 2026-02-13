@@ -40,8 +40,40 @@ Link to Original #5b: https://archive.org/details/september1996lon1996heri/page/
 
 While some auction companies continued with the previous format for a long period of time, others had two-columns of lots, but with the same general format (including interspersed images), starting in the 1970s or 1980s. Short_Descriptions are nearly universal, and Headlines are provided for almost every imaged lot, with images becoming more and more common as time goes by.  Two files exist: one for Superior Auctions (5a), and one for Heritage Auctions (5b). The latter was included to see if the model made for the former was generalizable, and it was.
 
+## Process
+
+Download the two Python files, `config.py` and `auction_parser.py`. Open both, and run `config.py`. It will obtain all of the information it needs from `auction_parser.py` without having to run the latter file. The user will have to set up their own instance of the Layout Parser at https://console.cloud.google.com/ai/document-ai.  Once at that link, follow these steps:
+1. Click "CREATE PROCESSOR"
+2. Select "Layout Parser" (under Document OCR)
+3. Choose your region
+4. Name it "auction-catalog-parser"
+5. Click "CREATE"
+6. **Copy the Processor ID** from the details page
+
 ## Output
 
-The model outputs an Excel file, auction_catalog_parser.xlsx. The file example_auction_catalog_parser contains a hand-typed version of the ideal.  However, it excludes file 5b, since as mentioned previously, that is used to test the generalizability of the scraper using the most complex possible format.
+The model outputs an Excel file, `auction_catalog_parser.xlsx`. The file `example_auction_catalog_parser.xlsx` contains a hand-typed version of the ideal.  However, it excludes file 5b, since as mentioned previously, that is used to test the generalizability of the scraper using the most complex possible format.
+
+Here is a Data Dictionary for the outputted file:
+
+| Column | Description |
+| --- | --- |
+| Catalog_Source    | The name of the parsed file that the lot came from. |
+| Lot_No            | Lot Number |
+| Page_Start        | Unimplemented - Page of catalog |
+| Page_End          | Unimplemented - Page of catalog |
+| Catalog_Section   | Unimplemented - Section of catalog (Half Cents, Early Half Dollars, etc.) |
+| Headline          | For expensive lots, headline above the image and description |
+| Image_Link        | Unimplemented - Plan to crop images and automatically upload them to Google Cloud |
+| Short_Description | For newer catalogs, the bolded portion at the start of the lot description |
+| Long_Description  | Non-bolded item description |
+| Pedigree          | For newer catalogs, the italicized section after the description that indicates prior ownership or sale appearances |
+| Sale_Price        | For named and priced catalogs, the price the coin sold for |
+| Sold_To           | For named and priced catalogs, the successful bidder, as annotated in the catalog |
+| Year              | Year of the coin |
+| Grade             | Grade of the coin. For non-certified coins, this is as described in the Long_Description, Sheldon Scale or not. |
+| Grading_Service   | For post-1986 sales of certified coins, the grading service that certified it. |
+| Variety           | For pre-1840 U.S. coins, the die marriage (such as "Newcomb-1", etc.) |
+| Rarity            | Tha rarity of the die marriage |
 
 ## Limitations
