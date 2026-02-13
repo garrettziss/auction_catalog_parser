@@ -77,3 +77,12 @@ Here is a Data Dictionary for the outputted file:
 | Rarity            | Tha rarity of the die marriage |
 
 ## Limitations
+
+This project has been more successful than the author initially intended, but there are still significant shortcomings:
+
+* The scraper still has issues differentiating the handwritten text from the typed text in named and priced sales. This leads to a number of issues, including nonsense characters and mistaking the years of the coins for lot numbers. The author has created versions that work slightly better for non-named and priced sales, but fall flat on their face for named and priced sales.
+* The bold-text Short Descriptions are not reliably differentiated from the remaining text.  This is in part due to a limitation of Google's Layour Parser, which cannot natively identify and differentiate bold text.
+* For old catalogs created before U.S. numismatics standardized on the Sheldon Grading Scale, the parser fails to capture multi-word grades (such as just capturing "Fine" instead of "Extremely Fine" or "Ex. Fine"; this works sometimes, but not universally).
+* Lot numbers for the next lot are sometimes included as prices realized for the current lot, even when the next lot is properly parsed.
+* There is no framework to account for group lots. A few do exist in the data, and the formatting differences should be minor. But due to their rarity, a comprehensive evaluation of the failures relating to group lots has not been undertaken.
+* There are still various errors here and there.
