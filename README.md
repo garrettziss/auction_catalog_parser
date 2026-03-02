@@ -38,7 +38,7 @@ Link to Original #5a: https://archive.org/details/jaschaheifetzcol1989supe/page/
 Example Catalog #5b: The Long Beach Sale (Heritage, 9/1996)  
 Link to Original #5b: https://archive.org/details/september1996lon1996heri/page/63/mode/1up
 
-While some auction companies continued with the previous format for a long period of time, others had two-columns of lots, but with the same general format (including interspersed images), starting in the 1970s or 1980s. Short_Descriptions are nearly universal, and Headlines are provided for almost every imaged lot, with images becoming more and more common as time goes by.  Two files exist: one for Superior Auctions (5a), and one for Heritage Auctions (5b). The latter was included to see if the model made for the former was generalizable, and it was.
+While some auction companies continued with the previous format for a long period of time, others had two-columns of lots, but with the same general format (including interspersed images), starting in the 1970s or 1980s. Short_Descriptions are nearly universal, and Headlines are provided for almost every imaged lot, with images becoming more and more common as time goes by.  Two files exist: one for Superior Auctions (5a), and one for Heritage Auctions (5b). The latter was included to see if the model made for the former was generalizable (and thus was not transcribed), and it was generalizable.
 
 ## Process
 
@@ -76,13 +76,82 @@ Here is a Data Dictionary for the outputted file:
 | Variety           | For pre-1840 U.S. coins, the die marriage (such as "Newcomb-1", etc.) |
 | Rarity            | Tha rarity of the die marriage |
 
+## Accuracy
+
+#### Lot_No
+
+The parser picks up the following number of lots from each catalog:
+
+| Catalog | Parsed Lots | Actual Lots | Accuracy |
+| --- | --- | --- | --- |
+| 1. No Annotations (Bidwell and Cottier, 1885)                 |  | 67 |  |
+| 2. Priced, Not Named (Norris, 1894)                           |  | 43 |  |
+| 3. Named and Priced (Galpin Foreign Coins and Medals, 5.1883) |  | 69 |  |
+| 4. Interspersed Images                                        |  | 21 |  |
+| 5a. Complex Layouts Superior                                  |  | 76 |  |
+| 5b. Complex Layouts Heritagex                                 |  | 60 |  |
+
+(False alarms)
+
+#### Page_PDF
+
+
+
+#### Catalog_Section
+
+
+
+#### Headline
+
+
+
+#### Image
+
+
+
+#### Year
+
+
+
+#### Grade
+
+
+
+#### Grading Service
+
+
+
+#### Variety and Rarity
+
+
+
+#### Short_Description
+
+
+
+#### Long_Description
+
+
+
+#### Pedigree
+
+
+
+#### Sale_Price and Sold_To
+
+For these columns, only the Named and/or Priced catalogs (#2 and 3) are in play, as the others have no way of having this information available in-line with the lots.  The code ignores these columns for non-named and/or priced sales, which solves an additional problem of the program mistaking lot numbers for prices realized.
+
+| Catalog | Parsed Lots | Actual Lots | Accuracy |
+| --- | --- | --- | --- |
+| 2. Priced, Not Named (Norris, 1894)                           |  | 43 |  |
+| 3. Named and Priced (Galpin Foreign Coins and Medals, 5.1883) |  | 69 |  |
+
 ## Limitations
 
 This project has been more successful than the author initially intended, but there are still significant shortcomings:
 
 * The scraper still has issues differentiating the handwritten text from the typed text in named and priced sales. This leads to a number of issues, including nonsense characters and mistaking the years of the coins for lot numbers. The author has created versions that work slightly better for non-named and priced sales, but fall flat on their face for named and priced sales.
 * The bold-text Short Descriptions are not reliably differentiated from the remaining text.  This is in part due to a limitation of Google's Layour Parser, which cannot natively identify and differentiate bold text.
-* For old catalogs created before U.S. numismatics standardized on the Sheldon Grading Scale, the parser fails to capture multi-word grades (such as just capturing "Fine" instead of "Extremely Fine" or "Ex. Fine"; this works sometimes, but not universally).
 * Lot numbers for the next lot are sometimes included as prices realized for the current lot, even when the next lot is properly parsed.
-* There is no framework to account for group lots. A few do exist in the data, and the formatting differences should be minor. But due to their rarity, a comprehensive evaluation of the failures relating to group lots has not been undertaken.
-* There are still various errors here and there.
+* There is no framework to account for group lots. A few do exist in the data, and the formatting differences should be minor. But due to their rarity (both in these catalogs and in general), a comprehensive evaluation of the failures relating to group lots has not been undertaken.
+* There are still various errors here and there.  One, which happens only occasionally now, is that multi-word grades are not captured properly for old catalogs from before there was a standardized coin grading system (such as just capturing "Fine" instead of "Extremely Fine" or "Ex. Fine"; even though these terms are hard-coded into the list of grades to account for).
