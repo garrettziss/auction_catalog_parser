@@ -58,23 +58,22 @@ Here is a Data Dictionary for the outputted file:
 
 | Column | Description |
 | --- | --- |
-| Catalog_Source    | The name of the parsed file that the lot came from. |
-| Lot_No            | Lot Number |
-| Page_Start        | Unimplemented - Page of catalog |
-| Page_End          | Unimplemented - Page of catalog |
-| Catalog_Section   | Unimplemented - Section of catalog (Half Cents, Early Half Dollars, etc.) |
-| Headline          | For expensive lots, headline above the image and description |
-| Image_Link        | Unimplemented - Plan to crop images and automatically upload them to Google Cloud |
-| Short_Description | For newer catalogs, the bolded portion at the start of the lot description |
-| Long_Description  | Non-bolded item description |
+| Catalog_Source    | The name of the parsed file that the lot came from.                                                                 |
+| Lot_No            | Lot Number                                                                                                          |
+| Page_PDF          | page number the lot is found on in the uploaded PDF                                                                 |
+| Catalog_Section   | Unimplemented - Section of catalog (Half Cents, Early Half Dollars, etc.)                                           |
+| Headline          | For expensive lots, headline above the image and description                                                        |
+| Image             | Does this lot have an image associated with it? Yes if so, empty string if not                                      |
+| Year              | Year of the coin                                                                                                    |
+| Grade             | Grade of the coin. For non-certified coins, this is as described in the Long_Description, Sheldon Scale or not.     |
+| Grading_Service   | For post-1986 sales of certified coins, the grading service that certified it.                                      |
+| Variety           | For pre-1840 U.S. coins, the die marriage (such as "Newcomb-1", etc.)                                               |
+| Rarity            | For pre-1840 U.S. coins, the rarity of the die marriage                                                             |
+| Short_Description | For newer catalogs, the bolded portion at the start of the lot description                                          |
+| Long_Description  | Non-bolded item description                                                                                         |
 | Pedigree          | For newer catalogs, the italicized section after the description that indicates prior ownership or sale appearances |
-| Sale_Price        | For named and priced catalogs, the price the coin sold for |
-| Sold_To           | For named and priced catalogs, the successful bidder, as annotated in the catalog |
-| Year              | Year of the coin |
-| Grade             | Grade of the coin. For non-certified coins, this is as described in the Long_Description, Sheldon Scale or not. |
-| Grading_Service   | For post-1986 sales of certified coins, the grading service that certified it. |
-| Variety           | For pre-1840 U.S. coins, the die marriage (such as "Newcomb-1", etc.) |
-| Rarity            | Tha rarity of the die marriage |
+| Sale_Price        | For named and priced catalogs, the price the coin sold for                                                          |
+| Sold_To           | For named and priced catalogs, the successful bidder, as annotated in the catalog                                   |
 
 ## Accuracy
 
@@ -84,30 +83,66 @@ The parser picks up the following number of lots from each catalog:
 
 | Catalog | Parsed Lots | Actual Lots | Accuracy |
 | --- | --- | --- | --- |
-| 1. No Annotations (Bidwell and Cottier, 1885)                 |  | 67 |  |
-| 2. Priced, Not Named (Norris, 1894)                           |  | 43 |  |
-| 3. Named and Priced (Galpin Foreign Coins and Medals, 5.1883) |  | 69 |  |
-| 4. Interspersed Images                                        |  | 21 |  |
-| 5a. Complex Layouts Superior                                  |  | 76 |  |
-| 5b. Complex Layouts Heritagex                                 |  | 60 |  |
+| 1. No Annotations (Bidwell and Cottier, 1885)                 | 66 | 67 (Lots 677-743)   | 98.51% |
+| 2. Priced, Not Named (Norris, 1894)                           | 38 | 43 (Lots 1-43)      | 88.37% |
+| 3. Named and Priced (Galpin Foreign Coins and Medals, 5.1883) | 10 | 69 (Lots 212-280)   | 14.49% |
+| 4. Interspersed Images                                        | 18 | 21 (Lots 600-620)   | 85.71% |
+| 5a. Complex Layouts Superior                                  | 66 | 76 (Lots 919-994)   | 86.84% |
+| 5b. Complex Layouts Heritagex                                 | 55 | 60 (Lots 6294-6353) | 91.67% |
 
-(False alarms)
+There were also a few non-lots that it detected as lots (mostly page numbers, or failures to detect more complex layouts:
+
+| Catalog | False Lots | Notes |
+| --- | --- | --- |
+| 1. No Annotations (Bidwell and Cottier, 1885)                 | 3  | These were the page numbers for the three pages. |
+| 2. Priced, Not Named (Norris, 1894)                           | 0  |  |
+| 3. Named and Priced (Galpin Foreign Coins and Medals, 5.1883) | 0  |  |
+| 4. Interspersed Images                                        | 10 | These occurred due to mistakenly reading text from the image and the caption, as well as a failure to parse the more complex layouts on page 2, which contains lots 610 and 611 (it places these lots correctly in terms of chronology, but puts this same nonsense text in for their long description). |
+| 5a. Complex Layouts Superior                                  | 5 | Appears to be the same issue as in the previous catalog. |
+| 5b. Complex Layouts Heritagex                                 | 8 | Mistakenly picks up header and footer information, and splits some of the description off into its own observation with no additional information. |
 
 #### Page_PDF
 
+The Page_PDF  was accurate on the following numbers of lots:
 
+| Catalog | Parsed Lots | Actual Lots | Accuracy | Notes |
+| --- | --- | --- | --- | --- |
+| 1. No Annotations (Bidwell and Cottier, 1885)                 | 65  | 66 | 98.48% | Missing only Lot 715 |
+| 2. Priced, Not Named (Norris, 1894)                           | N/A | 38 |        |                      |
+| 3. Named and Priced (Galpin Foreign Coins and Medals, 5.1883) | N/A | 10 |        |                      |
+| 4. Interspersed Images                                        | 18  | 18 | 100%   |                      |
+| 5a. Complex Layouts Superior                                  | 65  | 66 | 98.48% | Missing only Lot 959 |
+| 5b. Complex Layouts Heritagex                                 | 55  | 55 | 100%   |                      |
+
+For the named and/or priced catalogs, the lot numbers are not correctly parsed, making analysis of the delineation impossible.
 
 #### Catalog_Section
 
-
+This column is unimplemented.
 
 #### Headline
 
+| Catalog | Parsed Lots | Actual Lots | Accuracy | Notes |
+| --- | --- | --- | --- | --- |
+| 1. No Annotations (Bidwell and Cottier, 1885)                 | N/A | N/A | N/A    |  |
+| 2. Priced, Not Named (Norris, 1894)                           | N/A | N/A | N/A    |  |
+| 3. Named and Priced (Galpin Foreign Coins and Medals, 5.1883) | N/A | N/A | N/A    |  |
+| 4. Interspersed Images                                        | 0.5 | 4   | 12.5%  |  |
+| 5a. Complex Layouts Superior                                  | 0   | 1   | 0%     |  |
+| 5b. Complex Layouts Heritagex                                 | 0   | 9   | 0%     |  |
 
+This only correctly notes that there is a headline in one column, and it gets it wrong.
 
 #### Image
 
-
+| Catalog | Parsed Lots | Actual Lots | Accuracy | Notes |
+| --- | --- | --- | --- | --- |
+| 1. No Annotations (Bidwell and Cottier, 1885)                 | N/A | N/A | N/A    |  |
+| 2. Priced, Not Named (Norris, 1894)                           | N/A | N/A | N/A    |  |
+| 3. Named and Priced (Galpin Foreign Coins and Medals, 5.1883) | N/A | N/A | N/A    |  |
+| 4. Interspersed Images                                        | 0   | 8   | 0%     |  |
+| 5a. Complex Layouts Superior                                  | 0   | 13  | 0%     |  |
+| 5b. Complex Layouts Heritagex                                 | 1   | 9   | 0%     |  |
 
 #### Year
 
@@ -155,3 +190,4 @@ This project has been more successful than the author initially intended, but th
 * Lot numbers for the next lot are sometimes included as prices realized for the current lot, even when the next lot is properly parsed.
 * There is no framework to account for group lots. A few do exist in the data, and the formatting differences should be minor. But due to their rarity (both in these catalogs and in general), a comprehensive evaluation of the failures relating to group lots has not been undertaken.
 * There are still various errors here and there.  One, which happens only occasionally now, is that multi-word grades are not captured properly for old catalogs from before there was a standardized coin grading system (such as just capturing "Fine" instead of "Extremely Fine" or "Ex. Fine"; even though these terms are hard-coded into the list of grades to account for).
+* The raw PDF files are sometimes overprocessed when downloading them from archive.org, which obscures the handwritten named and priced elements.  This required significant searching before I found the example named and priced files I could use.  This could also impact the quality of the typed text, thereby making text analysis more difficult.
